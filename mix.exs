@@ -25,7 +25,11 @@ defmodule ExKaggle.MixProject do
   defp deps do
     [
       {:req, "~> 0.4"},
-      {:mox, "~> 1.1", only: :test}
+      {:mox, "~> 1.1", only: :test},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.34", only: :dev, runtime: false, warn_if_outdated: true},
+      {:mix_audit, "~> 2.1", only: [:dev, :test], runtime: false},
+      {:mix_test_interactive, "~> 4.3", only: :dev, runtime: false}
     ]
   end
 
