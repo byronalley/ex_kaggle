@@ -5,23 +5,29 @@ defmodule ExKaggle.Dataset do
 
   require Logger
 
+  @dataset_url_prefix "https://www.kaggle.com/api/v1/datasets/download/"
+
   @doc """
   Downloads and unzips the given dataset to the specified destination directory.
 
-  Returns a list of the extracted filenames. Usually this should just be one filename.
+  `dataset` is either an API URL or in the form `username/dataset_name`
+
+  Returns a list of the extracted filenames. Often this is just one filename.
   """
-  def download(url, dest_dir, client \\ ExKaggle.Client) do
+  def download(dataset, dest_dir, client \\ ExKaggle.Client) do
+    url =
+      @dataset_url_prefix
+      |> URI.merge(dataset)
+      |> to_string()
+
     temp_zip_path =
       Path.join(System.tmp_dir!(), "kaggle_dataset_#{System.unique_integer([:positive])}.zip")
 
     Logger.info("Downloading dataset to temporary zip file...")
 
-    dbg(temp_zip_path)
-
     Logger.info("Zipfile downloaded. Uncompressing...")
 
-    temp_stream =
-      File.stream!(temp_zip_path)
+    temp_stream = File.stream!(temp_zip_path)
 
     with {:ok, _response} <- client.get(url, into: temp_stream),
          :ok <- File.mkdir_p(Path.expand(dest_dir)),
