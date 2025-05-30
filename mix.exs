@@ -39,8 +39,10 @@ defmodule ExKaggle.MixProject do
 
   defp package do
     [
-      files: ~w(lib test README* ),
-      licenses: ["BSD 3-Clause"]
+      files: ~w(lib priv .formatter.exs mix.exs README* LICENSE*
+        CHANGELOG* src),
+      licenses: ["BSD 3-Clause"],
+      links: %{"GitHub" => "https://github.com/byronalley/ex_kaggle"}
     ]
   end
 

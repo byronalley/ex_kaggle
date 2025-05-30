@@ -13,6 +13,9 @@ defmodule ExKaggle.Client do
   @callback get(url :: String.t(), options :: keyword) ::
               {:ok, Req.Response.t()} | {:error, String.t()}
 
+  @doc """
+  Make a get request with API credentials.
+  """
   def get(url, opts \\ []) do
     %{username: username, key: key} = credentials()
 
