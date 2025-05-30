@@ -1,5 +1,10 @@
 defmodule ExKaggle.Client do
-  @moduledoc false
+  @moduledoc """
+  A client wrapper to use credentials to access the Kaggle API
+
+  Either username and key are in the kaggle config file ("~/.kaggle/kaggle.json")
+  or stored as environment variables: `KAGGLE_USERNAME`, `KAGGLE_KEY`
+  """
 
   require Logger
 
